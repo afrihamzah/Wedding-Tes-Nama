@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const targetElement = document.querySelector(openButton.getAttribute('href'));
         if (targetElement) {
             targetElement.scrollIntoView({
-                behavior: 'smooth' // Efek scroll halus
+                behavior: 'smooth' // Efek scroll haluss
             });
         }
     });
