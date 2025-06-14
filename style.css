@@ -1,0 +1,104 @@
+/* Pengaturan dasar untuk seluruh halaman */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lora', serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Bagian cover utama undangan */
+.invitation-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Tinggi penuh seukuran layar */
+    background-image: url('https://images.unsplash.com/photo-1525413223559-21312f38d3f9?q=80&w=1887&auto=format&fit=crop'); /* Ganti dengan URL gambar Anda */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+/* Lapisan gelap agar teks mudah dibaca */
+.invitation-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Ubah tingkat kegelapan di sini */
+}
+
+/* Konten di dalam cover */
+.content {
+    position: relative; /* Agar tidak tertutup lapisan gelap */
+    z-index: 2;
+    padding: 20px;
+}
+
+.intro-text {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.couple-names {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.divider {
+    width: 80px;
+    height: 2px;
+    background-color: white;
+    margin: 20px auto;
+}
+
+.guest-label {
+    font-size: 1rem;
+    margin-top: 30px;
+}
+
+.guest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 5px 0;
+    font-weight: 600;
+    min-height: 2.5rem; /* Memberi ruang agar layout tidak berantakan */
+}
+
+.location-text {
+    font-style: italic;
+}
+
+.open-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background-color: white;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.open-button:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+/* Aturan untuk layar kecil (ponsel) */
+@media (max-width: 600px) {
+    .couple-names {
+        font-size: 3rem;
+    }
+    .guest-name {
+        font-size: 1.5rem;
+    }
+}
