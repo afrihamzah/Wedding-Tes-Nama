@@ -1,9 +1,9 @@
 :root {
-  --bg-color: #fdf8f0; /* Off-white / Beige */
-  --text-color: #5d5d5d; /* Deep Gray */
-  --primary-color: #c7a17a; /* Gold / Tan Accent */
-  --heading-font: 'Sacramento', cursive;
-  --body-font: 'Work Sans', sans-serif;
+  --bg-color: #fdf8f0; 
+  --text-color: #5d5d5d; 
+  --primary-color: #c7a17a; 
+  --heading-font: 'Playfair Display', serif; /*<-- DIUBAH*/
+  --body-font: 'Lora', serif; /*<-- DIUBAH*/
 }
 
 /* GENERAL STYLES */
@@ -98,42 +98,104 @@ h1, h2, h3, h4, h5, h6 {
 #music-toggle { position: fixed; bottom: 80px; left: 20px; width: 45px; height: 45px; background-color: rgba(255, 255, 255, 0.9); color: var(--text-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; z-index: 1001; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; transition: opacity 0.5s ease-out, transform 0.5s ease-out; transform: translateX(-100px); }
 #music-toggle.visible { opacity: 1; visibility: visible; transform: translateX(0); }
 .spinning { animation: spin 3s linear infinite; }
-/* RSVP & WISHES SECTION */
-.rsvp .card {
-  border: 0;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  border-radius: 15px;
+.rsvp .rsvp-summary {
+  margin-top: 2rem;
+  text-align: center;
 }
-.rsvp .form-control {
+.rsvp .summary-item {
+  padding: 10px;
   border-radius: 10px;
-}
-.rsvp .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
   width: 100%;
 }
-.comment-list {
-  max-height: 400px;
-  overflow-y: auto;
-  margin-top: 2rem;
+.rsvp .summary-item.total {
+  background-color: #f0e9dd;
 }
-.comment-item {
-  background-color: white;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.rsvp .summary-item.hadir {
+  background-color: #198754;
+  color: white;
 }
-.comment-item strong {
-  color: var(--primary-color);
+.rsvp .summary-item.tidak-hadir {
+  background-color: #dc3545;
+  color: white;
+}
+.rsvp .summary-item .count {
   display: block;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.rsvp .summary-item span {
+  font-size: 0.8rem;
 }
 
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 768px) {
-  .home .couple { flex-direction: column; }
-  .home .love-icon { transform: rotate(90deg); margin: 20px 0; }
-  .invitation-cover h1 { font-size: 3rem; }
-  section { padding: 60px 0; }
+.rsvp-box {
+  background-color: white; /* Memberi latar belakang solid */
+  border: 1px solid var(--primary-color); /* Garis bingkai tipis dengan warna tema */
+  border-radius: 20px; /* Membuat sudutnya melengkung */
+  padding: 30px; /* Jarak antara konten dengan bingkai */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Efek bayangan lembut */
+  margin-top: 2rem;
+}
+
+.rsvp .card { border: 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.05); border-radius: 15px; }
+.rsvp .form-control { border-radius: 10px; }
+.rsvp .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); width: 100%; }
+#comment-list {
+  max-height: 500px; /* Atur tinggi maksimal kotak komentar di sini */
+  overflow-y: auto; /* Tampilkan scrollbar jika konten lebih tinggi */
+  margin-top: 1rem;
+  padding-right: 10px; /* Sedikit ruang untuk scrollbar agar tidak menempel */
+}
+
+/* STYLE BARU UNTUK ITEM KOMENTAR */
+.comment-item {
+  /* Ganti background-color menjadi rgba untuk transparansi */
+  background-color: rgba(255, 255, 255, 0.5); /* 0.85 = 85% opacity */
+
+  /* EFEK TAMBAHAN: 'Frosted Glass' untuk tampilan premium */
+  -webkit-backdrop-filter: blur(5px); /* Untuk support browser Safari */
+  backdrop-filter: blur(5px);
+
+  /* Properti lain tetap sama */
+  padding: 15px;
+  border-radius: 15px; /* Sedikit lebih melengkung agar lebih modern */
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sedikit perhalus shadow */
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.comment-header strong {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-family: var(--body-font);
+  font-weight: 600;
+}
+.comment-item .attendance-badge {
+  font-size: 0.8rem; /* Ukuran ikon di dalam badge */
+  color: white;
+  width: 28px; /* Lebar lingkaran */
+  height: 28px; /* Tinggi lingkaran */
+  border-radius: 50%; /* Membuatnya menjadi lingkaran sempurna */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.comment-item .attendance-badge.hadir {
+  background-color: #198754;
+}
+.comment-item .attendance-badge.tidak-hadir {
+  background-color: #dc3545;
+}
+.comment-body {
+  margin-bottom: 10px;
+}
+.comment-time {
+  font-size: 0.75rem;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
