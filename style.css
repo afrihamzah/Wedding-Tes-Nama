@@ -1,186 +1,139 @@
-/* Pengaturan dasar untuk seluruh halaman */
+:root {
+  --bg-color: #fdf8f0; /* Off-white / Beige */
+  --text-color: #5d5d5d; /* Deep Gray */
+  --primary-color: #c7a17a; /* Gold / Tan Accent */
+  --heading-font: 'Sacramento', cursive;
+  --body-font: 'Work Sans', sans-serif;
+}
+
+/* GENERAL STYLES */
 body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Lora', serif;
-    background-color: #933b3b;
-    color: #333;
+  font-family: var(--body-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
-
-/* KELAS BARU: Untuk mengunci scroll */
 body.scroll-lock {
-    overflow: hidden;
+  overflow: hidden;
 }
-
-/* Bagian cover utama undangan */
-.invitation-cover {
-    display: flex; /* ... (aturan yang sudah ada tetap sama) ... */
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1525413223559-21312f38d3f9?q=80&w=1887&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    position: fixed; /* Ubah ke fixed agar tidak mengganggu layout lain */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    transition: opacity 1s ease-out, visibility 1s; /* Tambahkan transisi */
-}
-
-/* KELAS BARU: Untuk efek fade-out */
-.invitation-cover.fade-out {
-    opacity: 0;
-    visibility: hidden; /* Sembunyikan setelah transisi selesai */
-}
-
-/* ... (kode CSS untuk .content dan elemen lain tetap sama) ... */
-
-.content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-}
-
-/* ... (kode CSS untuk .intro-text, .couple-names, dst. tetap sama) ... */
-
-.intro-text {
-    font-size: 1rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-.couple-names {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    margin: 10px 0;
-    font-weight: 700;
-}
-
-.divider {
-    width: 80px;
-    height: 2px;
-    background-color: white;
-    margin: 20px auto;
-}
-
-.guest-label {
-    font-size: 1rem;
-    margin-top: 30px;
-}
-
-.guest-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    margin: 5px 0;
-    font-weight: 600;
-    min-height: 2.5rem; /* Memberi ruang agar layout tidak berantakan */
-}
-
-.location-text {
-    font-style: italic;
-}
-
-.open-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 30px;
-    background-color: white;
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 30px;
-    transition: background-color 0.3s, transform 0.3s;
-    cursor: pointer;
-}
-
-.open-button:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.05);
-}
-
-/* KELAS BARU: Aturan untuk konten utama */
-.main-content {
-    display: none; /* Sembunyikan pada awalnya */
-    opacity: 0; /* Mulai dari transparan */
-    transition: opacity 1s ease-in; /* Efek fade-in */
-}
-
-.main-content.visible {
-    display: block;
-    opacity: 1;
-}
-
-/* Aturan untuk layar kecil (ponsel) */
-@media (max-width: 600px) {
-    .couple-names {
-        font-size: 3rem;
-    }
-    .guest-name {
-        font-size: 1.5rem;
-    }
-}
-
-/* ======================================= */
-/* ===== STYLE BARU UNTUK KONTROL MUSIK ===== */
-/* ======================================= */
-
-#music-toggle {
-  position: fixed;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%) translateX(-80px); /* Awalnya bergeser ke kiri */
-  width: 50px;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #333;
-  border-radius: 50%;
+section {
+  padding: 80px 0;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 101;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
-  /* Aturan transisi */
-  opacity: 0; /* Awalnya transparan */
-  visibility: hidden; /* Awalnya tidak terlihat & tidak bisa diklik */
-  transition: opacity 1s ease-out, transform 1s ease-out, visibility 1s;
+  position: relative;
+  overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  color: var(--primary-color);
 }
 
-#music-toggle.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(-50%) translateX(0); /* Kembali ke posisi normal */
+/* PRELOADER */
+#preloader {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
+  background-color: #1d1d1d; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+#preloader p { margin-top: 20px; font-family: 'Lora', serif; letter-spacing: 2px; }
+#preloader.hidden { opacity: 0; visibility: hidden; }
+.spinner { border: 6px solid rgba(255, 255, 255, 0.3); border-top-color: #ffffff; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* INVITATION COVER */
+.invitation-cover {
+  display: flex; justify-content: center; align-items: center; height: 100vh;
+  background: url('https://images.unsplash.com/photo-1565299479361-b5a7a7de44a3?auto=format&fit=crop&q=80&w=1887') no-repeat center center/cover;
+  color: white; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  transition: opacity 1s ease-out, visibility 1s;
+}
+.invitation-cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); }
+.invitation-cover .content { position: relative; z-index: 2; padding: 20px; }
+.invitation-cover h1 { font-size: 5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.invitation-cover h2, .invitation-cover h4 { font-family: var(--body-font); font-weight: 300; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+.invitation-cover h2 { font-size: 1.5rem; font-weight: 600; }
+.invitation-cover .open-button { display: inline-block; margin-top: 30px; padding: 12px 30px; background-color: var(--primary-color); color: white; border-radius: 30px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;}
+.invitation-cover .open-button:hover { transform: scale(1.05); background-color: #d4b08a; }
+.invitation-cover.fade-out { opacity: 0; visibility: hidden; }
+
+/* MAIN CONTENT */
+.main-content { display: none; opacity: 0; transition: opacity 1s ease-in; }
+.main-content.visible { display: block; opacity: 1; }
+
+/* HOME SECTION */
+.home .couple { display: flex; align-items: center; justify-content: center; margin-top: 50px; gap: 1rem;}
+.home .couple-item { text-align: center; }
+.home .couple-item h3 { font-size: 2.5rem; }
+.home .love-icon { font-size: 2.5rem; color: var(--primary-color); margin: 0 20px; }
+.floral-divider { margin-bottom: 2rem; }
+
+/* INFO SECTION */
+.info .card { border: 1px solid var(--primary-color); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.info .card-header { background-color: var(--primary-color); color: white; font-family: var(--heading-font); font-size: 2.5rem; border-top-left-radius: 14px; border-top-right-radius: 14px;}
+.info .card-body i { font-size: 2rem; color: var(--primary-color); margin-bottom: 10px; }
+#countdown .simply-section { background: var(--primary-color); color: white; border-radius: 10px; padding: 10px; margin: 0 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+#countdown .simply-amount { font-size: 1.5rem; font-weight: 700; }
+#countdown .simply-word { font-size: 0.7rem; font-weight: 300; }
+
+/* GALLERY SECTION */
+.gallery .img-fluid { border-radius: 10px; transition: transform 0.3s ease; cursor: pointer; }
+.gallery .img-fluid:hover { transform: scale(1.05); }
+
+/* GIFT SECTION */
+.gift .card { border: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 15px; }
+.gift .btn { background-color: var(--primary-color); color: white; }
+
+/* CLOSING SECTION */
+.closing { background-color: #e9e2d6; }
+
+/* FLOATING NAVBAR & MUSIC TOGGLE */
+.bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; transition: transform 0.5s ease-out; transform: translateY(100%); }
+.bottom-nav.visible { transform: translateY(0); }
+.bottom-nav .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-color); text-decoration: none; font-size: 12px; transition: color 0.3s; }
+.bottom-nav .nav-item i { font-size: 20px; margin-bottom: 4px; }
+.bottom-nav .nav-item.active { color: var(--primary-color); }
+.bottom-nav .nav-item:hover { color: var(--primary-color); }
+
+#music-toggle { position: fixed; bottom: 80px; left: 20px; width: 45px; height: 45px; background-color: rgba(255, 255, 255, 0.9); color: var(--text-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; z-index: 1001; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; transition: opacity 0.5s ease-out, transform 0.5s ease-out; transform: translateX(-100px); }
+#music-toggle.visible { opacity: 1; visibility: visible; transform: translateX(0); }
+.spinning { animation: spin 3s linear infinite; }
+/* RSVP & WISHES SECTION */
+.rsvp .card {
+  border: 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-radius: 15px;
+}
+.rsvp .form-control {
+  border-radius: 10px;
+}
+.rsvp .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  width: 100%;
+}
+.comment-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 2rem;
+}
+.comment-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.comment-item strong {
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 5px;
 }
 
-#music-toggle:hover {
-  /* Hapus transform Y agar tidak bentrok dengan transisi utama */
-  transform: scale(1.1);
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .home .couple { flex-direction: column; }
+  .home .love-icon { transform: rotate(90deg); margin: 20px 0; }
+  .invitation-cover h1 { font-size: 3rem; }
+  section { padding: 60px 0; }
 }
-
-/* Penyesuaian untuk hover saat sudah visible */
-#music-toggle.visible:hover {
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Animasi berputar (tetap sama) */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Kelas untuk menerapkan animasi (tetap sama) */
-.spinning {
-  animation: spin 3s linear infinite;
-}
-
-/* Hapus kelas .hidden jika masih ada, karena sudah tidak kita gunakan untuk tombol ini */
