@@ -3,41 +3,49 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Lora', serif;
-    background-color: #f4f4f4;
+    background-color: #933b3b;
     color: #333;
+}
+
+/* KELAS BARU: Untuk mengunci scroll */
+body.scroll-lock {
+    overflow: hidden;
 }
 
 /* Bagian cover utama undangan */
 .invitation-cover {
-    display: flex;
+    display: flex; /* ... (aturan yang sudah ada tetap sama) ... */
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Tinggi penuh seukuran layar */
-    background-image: url('https://images.unsplash.com/photo-1525413223559-21312f38d3f9?q=80&w=1887&auto=format&fit=crop'); /* Ganti dengan URL gambar Anda */
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1525413223559-21312f38d3f9?q=80&w=1887&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
-    position: relative;
-}
-
-/* Lapisan gelap agar teks mudah dibaca */
-.invitation-cover::before {
-    content: '';
-    position: absolute;
+    position: fixed; /* Ubah ke fixed agar tidak mengganggu layout lain */
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Ubah tingkat kegelapan di sini */
+    width: 100%;
+    z-index: 100;
+    transition: opacity 1s ease-out, visibility 1s; /* Tambahkan transisi */
 }
 
-/* Konten di dalam cover */
+/* KELAS BARU: Untuk efek fade-out */
+.invitation-cover.fade-out {
+    opacity: 0;
+    visibility: hidden; /* Sembunyikan setelah transisi selesai */
+}
+
+/* ... (kode CSS untuk .content dan elemen lain tetap sama) ... */
+
 .content {
-    position: relative; /* Agar tidak tertutup lapisan gelap */
+    position: relative;
     z-index: 2;
     padding: 20px;
 }
+
+/* ... (kode CSS untuk .intro-text, .couple-names, dst. tetap sama) ... */
 
 .intro-text {
     font-size: 1rem;
@@ -86,11 +94,24 @@ body, html {
     font-weight: bold;
     border-radius: 30px;
     transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
 }
 
 .open-button:hover {
     background-color: #e0e0e0;
     transform: scale(1.05);
+}
+
+/* KELAS BARU: Aturan untuk konten utama */
+.main-content {
+    display: none; /* Sembunyikan pada awalnya */
+    opacity: 0; /* Mulai dari transparan */
+    transition: opacity 1s ease-in; /* Efek fade-in */
+}
+
+.main-content.visible {
+    display: block;
+    opacity: 1;
 }
 
 /* Aturan untuk layar kecil (ponsel) */
@@ -102,3 +123,64 @@ body, html {
         font-size: 1.5rem;
     }
 }
+
+/* ======================================= */
+/* ===== STYLE BARU UNTUK KONTROL MUSIK ===== */
+/* ======================================= */
+
+#music-toggle {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%) translateX(-80px); /* Awalnya bergeser ke kiri */
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 101;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+  /* Aturan transisi */
+  opacity: 0; /* Awalnya transparan */
+  visibility: hidden; /* Awalnya tidak terlihat & tidak bisa diklik */
+  transition: opacity 1s ease-out, transform 1s ease-out, visibility 1s;
+}
+
+#music-toggle.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0); /* Kembali ke posisi normal */
+}
+
+#music-toggle:hover {
+  /* Hapus transform Y agar tidak bentrok dengan transisi utama */
+  transform: scale(1.1);
+}
+
+/* Penyesuaian untuk hover saat sudah visible */
+#music-toggle.visible:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Animasi berputar (tetap sama) */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Kelas untuk menerapkan animasi (tetap sama) */
+.spinning {
+  animation: spin 3s linear infinite;
+}
+
+/* Hapus kelas .hidden jika masih ada, karena sudah tidak kita gunakan untuk tombol ini */

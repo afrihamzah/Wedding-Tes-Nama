@@ -5,43 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Undangan Pernikahan | Rizky & Aulia</title>
 
-    <link rel="stylesheet" href="style.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="invitation-cover">
       <div class="content">
         <p class="intro-text">UNDANGAN PERNIKAHAN</p>
         <h1 class="couple-names">Rizky & Aulia</h1>
-
         <div class="divider"></div>
-
         <p class="guest-label">Kepada Yth.</p>
         <h2 id="nama-tamu" class="guest-name">Tamu Undangan</h2>
-
         <p class="location-text">di Tempat</p>
-
-        <a href="#isi-undangan" class="open-button"> Buka Undangan </a>
+        <a href="#" class="open-button"> Buka Undangan </a>
       </div>
     </div>
 
-    <div
-      id="isi-undangan"
-      class="main-content"
-      style="padding: 20px; text-align: center"
-    >
-      <h2>Detail Acara</h2>
-      <p>Konten lengkap undangan Anda ada di sini...</p>
-      <p>(Informasi akad, resepsi, peta, dll.)</p>
+    <div id="isi-undangan" class="main-content">
+      <div class="container" style="padding: 40px 20px; text-align: center">
+        <h2 data-aos="fade-down">Detail Acara</h2>
+        <p data-aos="fade-up" data-aos-delay="200">
+          Konten lengkap undangan Anda ada di sini...
+        </p>
+        <p data-aos="fade-up" data-aos-delay="400">
+          (Informasi akad, resepsi, peta, dll.)
+        </p>
+      </div>
     </div>
 
+    <audio id="background-music" loop>
+      <source
+        src="Audio/Tulus - Teman Hidup Lirik Lagu Indonesia.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <div id="music-toggle">
+      <i class="fa-solid fa-compact-disc"></i>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
